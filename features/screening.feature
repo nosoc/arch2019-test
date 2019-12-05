@@ -15,6 +15,6 @@ Feature: hire or not to hire (inheritance)
   Scenario: Strong candidate and experienced HR
     Given the candidate has an experience of 2.5 year and HR manager has an experience of 2.4 year
      When scanned by HR manager
-     Then next interview round is NoExtraRound
+     Then next interview round is ExtraRound
 
  

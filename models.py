@@ -27,7 +27,7 @@ class HR(Model):
 class Candidate(Model):
     
     reviewed_by = ForeignKeyField(HR, backref='candidates')
-    
+
     name = CharField()
     experience = FloatField()
     decision = CharField(default="pending")
@@ -48,11 +48,11 @@ class Candidate(Model):
     @hybrid_method
     def get_candidate_outcome(self, hr_person):
         if ((hr_person.get_experience() < 1) & (self.get_experience() < 1) ):
-            self.decision = "additional screening"
+            self.decision = "ExtraRound"
         elif ((hr_person.get_experience() < 1) & (self.get_experience() > 1) ):
-            self.decision = "hired"
+            self.decision = "NoExtraRound"
         else:
-            self.decision = "additional screening"
+            self.decision = "ExtraRound"
             # Return an outcome of the screening
         return(self.decision)
     
