@@ -9,7 +9,7 @@ db_hr.connect()
 class HR(Model):
     
     name = CharField()
-    experience = IntegerField()
+    experience = FloatField()
     
     # getter for experience
     @hybrid_method
@@ -29,7 +29,7 @@ class Candidate(Model):
     reviewed_by = ForeignKeyField(HR, backref='candidates')
     
     name = CharField()
-    experience = IntegerField()
+    experience = FloatField()
     decision = CharField(default="pending")
     
     @hybrid_property
