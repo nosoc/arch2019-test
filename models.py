@@ -1,7 +1,14 @@
+
+## peewee ORM
 from peewee import *
+## playhouse.hybrid is used
+## in order allow define getters
+## and methods
+## inside peewee classes.
 from playhouse.hybrid import *
 
-## INFO: using peewee ORM
+## decorators like @hybrid_property
+## and @hybrid_method allows this functionality
 
 db_hr = SqliteDatabase('hr_2.db')
 db_hr.connect()
@@ -17,7 +24,7 @@ class HR(Model):
         return(self.experience)
             
     class Meta:
-        database = db_hr # This model uses the "people.db" database.
+        database = db_hr # This model uses the "hr_2.db" database.
 
 
 ## update values
@@ -37,7 +44,7 @@ class Candidate(Model):
         return(self.name)
     
     # getter for experience
-    # FIXME: rewrite using props
+    # FIXME: might be rewritten using props
     @hybrid_method
     def get_experience(self):
         return(self.experience)
@@ -57,12 +64,6 @@ class Candidate(Model):
         return(self.decision)
     
     class Meta:
-        database = db_hr # This model uses the "people.db" database.
+        database = db_hr # This model uses the "hr_2.db" database.
 
 db_hr.create_tables([HR, Candidate])
-
-# hr1 = HR.create(name='J1', experience=0.6)
-# hr2 = HR.create(name='J2', experience=0.7)
-# candidate1 = Candidate.create(reviewed_by=hr1, name="C1", experience=0.6)
-# candidate2 = Candidate.create(reviewed_by=hr2, name="C2", experience=1.6)
-
